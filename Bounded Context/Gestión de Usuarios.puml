@@ -4,7 +4,7 @@ skinparam classAttributeIconSize 0
 title Bounded Context - Gestión de Usuario
 
 abstract class Usuario {
-  +id: UUID
+  +id: idUsuario
   +nombres: String
   +apellidos: String
   +correoInstitucional: String

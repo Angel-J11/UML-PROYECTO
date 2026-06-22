@@ -4,27 +4,27 @@ skinparam classAttributeIconSize 0
 title Bounded Context - Comunicación
 
 class Chat {
-  +id: UUID
+  +id: idChat
   +estado: String
   +fechaCreacion: DateTime
 }
 
 class Mensaje {
-  +id: UUID
+  +id: idMensaje
   +contenido: String
   +fechaEnvio: DateTime
   +leido: boolean
 }
 
 class Notificacion {
-  +id: UUID
+  +id: idNotificacion
   +tipo: String
   +contenido: String
   +fechaEnvio: DateTime
 }
 
 class UbicacionCompartida {
-  +id: UUID
+  +id: idUbicacion
   +latitud: Double
   +longitud: Double
   +fechaActualizacion: DateTime

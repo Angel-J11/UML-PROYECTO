@@ -3,7 +3,7 @@
 title Diagrama de Base de Datos - RutaFlex
 
 entity usuario {
-  * id_usuario : UUID
+  * id_usuario : INT
   --
   nombres : varchar
   apellidos : varchar
@@ -13,27 +13,27 @@ entity usuario {
 }
 
 entity perfil {
-  * id_perfil : UUID
+  * id_perfil : INT
   --
-  id_usuario : UUID <<FK>>
+  id_usuario : INT <<FK>>
   foto : varchar
   bio : text
   universidad : varchar
 }
 
 entity credencial_institucional {
-  * id_credencial : UUID
+  * id_credencial : INT
   --
-  id_usuario : UUID <<FK>>
+  id_usuario : INT <<FK>>
   dominio : varchar
   validada : boolean
   fecha_validacion : datetime
 }
 
 entity ruta {
-  * id_ruta : UUID
+  * id_ruta : INT
   --
-  id_conductor : UUID <<FK>>
+  id_conductor : INT <<FK>>
   origen : varchar
   destino : varchar
   hora_salida : datetime
@@ -43,72 +43,72 @@ entity ruta {
 }
 
 entity viaje {
-  * id_viaje : UUID
+  * id_viaje : INT
   --
-  id_ruta : UUID <<FK>>
+  id_ruta : INT <<FK>>
   fecha : date
   hora : time
   estado : varchar
 }
 
 entity detalle_viaje {
-  * id_detalle : UUID
+  * id_detalle : INT
   --
-  id_viaje : UUID <<FK>>
+  id_viaje : INT <<FK>>
   punto_encuentro : varchar
   descripcion : text
 }
 
 entity chat {
-  * id_chat : UUID
+  * id_chat : INT
   --
-  id_viaje : UUID <<FK>>
+  id_viaje : INT <<FK>>
   estado : varchar
   fecha_creacion : datetime
 }
 
 entity mensaje {
-  * id_mensaje : UUID
+  * id_mensaje : INT
   --
-  id_chat : UUID <<FK>>
-  id_usuario : UUID <<FK>>
+  id_chat : INT <<FK>>
+  id_usuario : INT <<FK>>
   contenido : text
   fecha_envio : datetime
   leido : boolean
 }
 
 entity calificacion {
-  * id_calificacion : UUID
+  * id_calificacion : INT
   --
-  id_viaje : UUID <<FK>>
-  id_emisor : UUID <<FK>>
-  id_receptor : UUID <<FK>>
+  id_viaje : INT <<FK>>
+  id_emisor : INT <<FK>>
+  id_receptor : INT <<FK>>
   puntaje : int
   comentario : text
   fecha : datetime
 }
 
 entity historial_viaje {
-  * id_historial : UUID
+  * id_historial : INT
   --
-  id_usuario : UUID <<FK>>
-  id_viaje : UUID <<FK>>
+  id_usuario : INT <<FK>>
+  id_viaje : INT <<FK>>
   fecha_registro : datetime
   descripcion : text
 }
 
 entity ahorro {
-  * id_ahorro : UUID
+  * id_ahorro : INT
   --
-  id_historial : UUID <<FK>>
+  id_historial : INT <<FK>>
   monto : decimal
   moneda : varchar
 }
 
 entity co2_ahorrado {
-  * id_co2 : UUID
+  * id_co2 : INT
   --
-  id_historial : UUID <<FK>>
+  id_historial : INT <<FK>>
   valor : decimal
   unidad : varchar
 }

@@ -4,32 +4,32 @@ skinparam classAttributeIconSize 0
 title Bounded Context - Seguridad e Historial
 
 class Calificacion {
-  +id: UUID
+  +id: idCalificacion
   +puntaje: int
   +comentario: String
   +fecha: DateTime
 }
 
 class HistorialViaje {
-  +id: UUID
+  +id: idHistorial
   +fechaRegistro: DateTime
   +descripcion: String
 }
 
 class Ahorro {
-  +id: UUID
+  +id: idAhorro
   +monto: Decimal
   +moneda: String
 }
 
 class CO2Ahorrado {
-  +id: UUID
+  +id: idCo2
   +valor: Decimal
   +unidad: String
 }
 
 class ValidacionIdentidad {
-  +id: UUID
+  +id: idValidadcion
   +estado: String
   +fechaValidacion: DateTime
 }
