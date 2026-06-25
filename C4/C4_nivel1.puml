@@ -1,14 +1,30 @@
 @startuml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 
-title RutaFlex - Diagrama de contexto
+title C4 - Diagrama de Contexto - RutaFlex
 
-Person(pasajero, "Pasajero", "Busca viajes compartidos")
-Person(conductor, "Conductor", "Publica rutas y transporta pasajeros")
+Person(passenger, "Pasajero", "Busca viajes compartidos")
+Person(driver, "Conductor", "Publica rutas y transporta pasajeros")
 
 System(rutaflex, "RutaFlex", "Plataforma de carpooling universitario")
 
-Rel(pasajero, rutaflex, "Busca viajes, reserva plazas")
-Rel(conductor, rutaflex, "Publica rutas, gestiona viajes")
+System_Ext(firebase, "Firebase Cloud Messaging", "Servicio de notificaciones push")
+System_Ext(maps, "Google Maps API", "Geolocalización y mapas")
+System_Ext(email, "Servicio de Correos", "Verificación de correo institucional")
+
+Rel(passenger, rutaflex, "Busca y reserva viajes")
+Rel(driver, rutaflex, "Publica y administra rutas")
+
+Rel(rutaflex, firebase, "Envía notificaciones")
+Rel(rutaflex, maps, "Obtiene rutas y ubicaciones")
+Rel(rutaflex, email, "Verifica correos institucionales")
+
+Lay_D(passenger, rutaflex)
+Lay_D(driver, rutaflex)
+
+
+Lay_D(rutaflex, firebase)
+Lay_D(rutaflex, maps)
+Lay_D(rutaflex, email)
 
 @enduml
