@@ -1,0 +1,33 @@
+@startuml "Gestión de Usuarios - Components"
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Gestión de Usuarios - Component Diagram
+
+Container(spa, "Single Page Application", "Angular", "Permite administrar la información de los usuarios.")
+ContainerDb(db, "Database", "MySQL", "Almacena datos de usuarios.")
+
+Container_Boundary(api, "Gestión de Usuarios API") {
+
+    Component(authentication, "Autenticación", "Application")
+    Component(profile, "Gestión de Perfil", "Application")
+    Component(users, "Gestión de Usuarios", "Application")
+    Component(shared, "Shared", "Shared Kernel")
+
+}
+
+Rel(spa, authentication, "")
+Rel(spa, profile, "")
+Rel(spa, users, "")
+
+Rel(authentication, profile, "")
+Rel(profile, users, "")
+
+Rel(authentication, shared, "")
+Rel(profile, shared, "")
+Rel(users, shared, "")
+
+Rel(authentication, db, "")
+Rel(profile, db, "")
+Rel(users, db, "")
+
+@enduml

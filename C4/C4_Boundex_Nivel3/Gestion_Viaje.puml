@@ -1,0 +1,31 @@
+@startuml "Gestión de Viajes - Components"
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Gestión de Viajes - Component Diagram
+
+Container(spa, "Single Page Application", "Angular", "Permite buscar, publicar y gestionar viajes.")
+ContainerDb(db, "Database", "MySQL", "Almacena información de viajes y rutas.")
+
+Container_Boundary(api, "Gestión de Viajes API") {
+
+    Component(searchTrips, "Buscar Viajes", "Application")
+    Component(publishRoute, "Publicar Ruta", "Application")
+    Component(manageTrips, "Gestionar Viajes", "Application")
+    Component(shared, "Shared", "Shared Kernel")
+
+}
+
+Rel(spa, searchTrips, "")
+Rel(spa, publishRoute, "")
+Rel(spa, manageTrips, "")
+
+Rel(searchTrips, publishRoute, "")
+Rel(searchTrips, shared, "")
+Rel(publishRoute, shared, "")
+Rel(manageTrips, shared, "")
+
+Rel(searchTrips, db, "")
+Rel(publishRoute, db, "")
+Rel(manageTrips, db, "")
+
+@enduml

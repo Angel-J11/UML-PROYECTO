@@ -1,0 +1,29 @@
+@startuml "Comunicación - Components"
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+title Comunicación - Component Diagram
+
+Container(spa, "Single Page Application", "Angular", "Permite la comunicación entre conductor y pasajero.")
+ContainerDb(db, "Database", "MySQL", "Almacena mensajes del chat.")
+
+Container_Boundary(api, "Comunicación API") {
+
+    Component(chat, "Chat", "Application")
+    Component(messages, "Gestión de Mensajes", "Application")
+    Component(notifications, "Notificaciones", "Application")
+    Component(shared, "Shared", "Shared Kernel")
+
+}
+
+Rel(spa, chat, "")
+Rel(chat, messages, "")
+Rel(messages, notifications, "")
+
+Rel(chat, shared, "")
+Rel(messages, shared, "")
+Rel(notifications, shared, "")
+
+Rel(messages, db, "")
+Rel(notifications, db, "")
+
+@enduml
