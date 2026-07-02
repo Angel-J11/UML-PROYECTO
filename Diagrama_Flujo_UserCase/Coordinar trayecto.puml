@@ -1,0 +1,17 @@
+@startuml
+start
+:Ingresar a la aplicación;
+:Autenticarse con correo universitario;
+:Seleccionar viaje confirmado;
+:Abrir chat del viaje;
+:Enviar mensaje;
+
+if (¿Chat disponible?) then (Sí)
+    :Mensaje enviado correctamente;
+    :Esperar respuesta del participante;
+else (No)
+    :Mostrar mensaje de chat no disponible;
+endif
+
+stop
+@enduml

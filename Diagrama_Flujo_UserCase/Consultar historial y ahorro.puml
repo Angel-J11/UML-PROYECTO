@@ -1,0 +1,16 @@
+@startuml
+start
+:Ingresar a la aplicación;
+:Autenticarse con correo universitario;
+:Ir a "Historial";
+
+if (¿Existen viajes registrados?) then (Sí)
+    :Mostrar historial de viajes;
+    :Calcular ahorro generado;
+    :Mostrar ahorro acumulado;
+else (No)
+    :Mostrar mensaje "Sin historial disponible";
+endif
+
+stop
+@enduml

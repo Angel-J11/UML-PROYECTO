@@ -1,0 +1,19 @@
+@startuml
+start
+:Ingresar a la aplicación;
+:Autenticarse con correo universitario;
+:Acceder al menú principal;
+:Seleccionar "Gestionar viajes";
+
+if (¿Es conductor?) then (Sí)
+  :Visualizar rutas publicadas;
+  :Gestionar pasajeros;
+else (No)
+  :Visualizar viajes reservados;
+  :Gestionar reservas;
+endif
+
+:Actualizar información del viaje;
+
+stop
+@enduml

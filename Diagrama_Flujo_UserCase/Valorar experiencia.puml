@@ -1,0 +1,17 @@
+@startuml
+start
+:Ingresar a la aplicación;
+:Autenticarse con correo universitario;
+:Seleccionar viaje finalizado;
+
+if (¿El viaje terminó?) then (Sí)
+    :Asignar calificación;
+    :Escribir comentario (opcional);
+    :Enviar valoración;
+    :Guardar calificación;
+else (No)
+    :Mostrar mensaje de que aún no es posible valorar;
+endif
+
+stop
+@enduml

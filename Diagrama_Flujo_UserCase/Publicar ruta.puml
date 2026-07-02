@@ -1,0 +1,20 @@
+@startuml
+start
+:Ingresar a la aplicación;
+:Autenticarse con correo universitario;
+:Ir a "Publicar ruta";
+:Ingresar origen;
+:Ingresar destino;
+:Ingresar fecha y hora;
+:Definir número de asientos;
+:Ingresar costo del viaje;
+
+if (¿Datos válidos?) then (Sí)
+    :Guardar ruta;
+    :Mostrar mensaje de publicación exitosa;
+else (No)
+    :Mostrar errores de validación;
+endif
+
+stop
+@enduml
