@@ -1,63 +1,63 @@
 @startuml ""
 
-package GestionUsuarios {
+package UserManagement {
 
-    package AgregadoUsuario {
+    package UserAggregate {
 
-        class Usuario <<AggregateRoot>> {
-            - UsuarioId: id
-            - NombreCompleto: nombre
-            - CorreoInstitucional: correo
-            - NumeroTelefono: telefono
+        class User <<AggregateRoot>> {
+            - UserId: id
+            - FullName: name
+            - InstitutionalEmail: email
+            - PhoneNumber: phoneNumber
         }
 
-        class UsuarioId <<ValueObject>> {
-            - Long: valor
+        class UserId <<ValueObject>> {
+            - Long: value
         }
 
-        class NombreCompleto <<ValueObject>> {
-            - String: nombres
-            - String: apellidos
+        class FullName <<ValueObject>> {
+            - String: firstName
+            - String: lastName
         }
 
-        class CorreoInstitucional <<ValueObject>> {
-            - String: valor
+        class InstitutionalEmail <<ValueObject>> {
+            - String: value
         }
 
-        class NumeroTelefono <<ValueObject>> {
-            - String: valor
+        class PhoneNumber <<ValueObject>> {
+            - String: value
         }
 
-        class Perfil <<Entity>> {
-            - PerfilId: id
-            - String: biografia
-            - String: fotoPerfil
+        class Profile <<Entity>> {
+            - ProfileId: id
+            - String: biography
+            - String: profilePicture
         }
 
-        class PerfilId <<ValueObject>> {
-            - Long: valor
+        class ProfileId <<ValueObject>> {
+            - Long: value
         }
 
-        class CredencialInstitucional <<Entity>> {
-            - CredencialId: id
-            - Boolean: validada
+        class InstitutionalCredential <<Entity>> {
+            - CredentialId: id
+            - Boolean: verified
         }
 
-        class CredencialId <<ValueObject>> {
-            - Long: valor
+        class CredentialId <<ValueObject>> {
+            - Long: value
         }
     }
 }
 
-Usuario --> UsuarioId
-Usuario --> NombreCompleto
-Usuario --> CorreoInstitucional
-Usuario --> NumeroTelefono
+User --> UserId
+User --> FullName
+User --> InstitutionalEmail
+User --> PhoneNumber
 
-Usuario "1" *--> "1" Perfil
-Usuario "1" *--> "1" CredencialInstitucional
+User "1" *--> "1" Profile
+User "1" *--> "1" InstitutionalCredential
 
-Perfil --> PerfilId
-CredencialInstitucional --> CredencialId
+Profile --> ProfileId
+InstitutionalCredential --> CredentialId
 
 @enduml

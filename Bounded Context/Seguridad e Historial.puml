@@ -1,95 +1,95 @@
 @startuml ""
 
-package SeguridadHistorial {
+package HistoryAndReputation {
 
-    package AgregadoCalificacion {
+    package RatingAggregate {
 
-        class Calificacion <<AggregateRoot>> {
-            - CalificacionId: id
-            - UsuarioCalificadoId: usuarioCalificadoId
-            - Puntaje: puntaje
+        class Rating <<AggregateRoot>> {
+            - RatingId: id
+            - RatedUserId: ratedUserId
+            - Score: score
         }
 
-        class CalificacionId <<ValueObject>> {
-            - Long: valor
+        class RatingId <<ValueObject>> {
+            - Long: value
         }
 
-        class UsuarioCalificadoId <<ValueObject>> {
-            - Long: valor
+        class RatedUserId <<ValueObject>> {
+            - Long: value
         }
 
-        class Puntaje <<ValueObject>> {
-            - Integer: valor
+        class Score <<ValueObject>> {
+            - Integer: value
         }
     }
 
-    package AgregadoHistorialViajes {
+    package TripHistoryAggregate {
 
-        class HistorialViajes <<AggregateRoot>> {
-            - HistorialId: id
-            - UsuarioId: usuarioId
+        class TripHistory <<AggregateRoot>> {
+            - HistoryId: id
+            - UserId: userId
         }
 
-        class HistorialId <<ValueObject>> {
-            - Long: valor
+        class HistoryId <<ValueObject>> {
+            - Long: value
         }
 
-        class RegistroViaje <<Entity>> {
-            - RegistroViajeId: id
-            - ViajeId: viajeId
+        class TripRecord <<Entity>> {
+            - TripRecordId: id
+            - TripId: tripId
         }
 
-        class RegistroViajeId <<ValueObject>> {
-            - Long: valor
+        class TripRecordId <<ValueObject>> {
+            - Long: value
         }
 
-        class Ahorro <<Entity>> {
-            - AhorroId: id
-            - Decimal: monto
+        class Savings <<Entity>> {
+            - SavingsId: id
+            - Decimal: amount
         }
 
-        class AhorroId <<ValueObject>> {
-            - Long: valor
+        class SavingsId <<ValueObject>> {
+            - Long: value
         }
 
-        class AhorroCO2 <<Entity>> {
-            - AhorroCO2Id: id
-            - Decimal: kilogramos
+        class CO2Savings <<Entity>> {
+            - CO2SavingsId: id
+            - Decimal: kilograms
         }
 
-        class AhorroCO2Id <<ValueObject>> {
-            - Long: valor
+        class CO2SavingsId <<ValueObject>> {
+            - Long: value
         }
     }
 }
 
-package Compartido {
+package Shared {
 
-    class UsuarioId <<ValueObject>> {
-        - Long: valor
+    class UserId <<ValueObject>> {
+        - Long: value
     }
 
-    class ViajeId <<ValueObject>> {
-        - Long: valor
+    class TripId <<ValueObject>> {
+        - Long: value
     }
 
 }
 
-Calificacion --> CalificacionId
-Calificacion --> UsuarioCalificadoId
-Calificacion --> Puntaje
+Rating --> RatingId
+Rating --> RatedUserId
+Rating --> Score
 
-HistorialViajes --> HistorialId
-HistorialViajes --> UsuarioId
+TripHistory --> HistoryId
+TripHistory --> UserId
 
-HistorialViajes "1" *--> "*" RegistroViaje
-HistorialViajes "1" *--> "*" Ahorro
-HistorialViajes "1" *--> "*" AhorroCO2
+TripHistory "1" *--> "*" TripRecord
+TripHistory "1" *--> "*" Savings
+TripHistory "1" *--> "*" CO2Savings
 
-RegistroViaje --> RegistroViajeId
-RegistroViaje --> ViajeId
+TripRecord --> TripRecordId
+TripRecord --> TripId
 
-Ahorro --> AhorroId
-AhorroCO2 --> AhorroCO2Id
+Savings --> SavingsId
+CO2Savings --> CO2SavingsId
 
 @enduml

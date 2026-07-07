@@ -1,65 +1,65 @@
 @startuml ""
 
-package Comunicacion {
+package Communication {
 
-    package AgregadoChat {
+    package ChatAggregate {
 
         class Chat <<AggregateRoot>> {
             - ChatId: id
-            - ViajeId: viajeId
+            - TripId: tripId
         }
 
         class ChatId <<ValueObject>> {
-            - Long: valor
+            - Long: value
         }
 
-        class Mensaje <<Entity>> {
-            - MensajeId: id
-            - UsuarioId: remitenteId
-            - ContenidoMensaje: contenido
+        class Message <<Entity>> {
+            - MessageId: id
+            - UserId: senderId
+            - MessageContent: content
         }
 
-        class MensajeId <<ValueObject>> {
-            - Long: valor
+        class MessageId <<ValueObject>> {
+            - Long: value
         }
 
-        class ContenidoMensaje <<ValueObject>> {
-            - String: valor
+        class MessageContent <<ValueObject>> {
+            - String: value
         }
 
-        class Notificacion <<Entity>> {
-            - NotificacionId: id
-            - String: tipo
+        class Notification <<Entity>> {
+            - NotificationId: id
+            - String: type
         }
 
-        class NotificacionId <<ValueObject>> {
-            - Long: valor
+        class NotificationId <<ValueObject>> {
+            - Long: value
         }
     }
 }
 
-package Compartido {
+package Shared {
 
-    class UsuarioId <<ValueObject>> {
-        - Long: valor
+    class UserId <<ValueObject>> {
+        - Long: value
     }
 
-    class ViajeId <<ValueObject>> {
-        - Long: valor
+    class TripId <<ValueObject>> {
+        - Long: value
     }
 
 }
 
 Chat --> ChatId
-Chat --> ViajeId
+Chat --> TripId
 
-Chat "1" *--> "1..*" Mensaje
-Chat "1" *--> "*" Notificacion
+Chat "1" *--> "1..*" Message
+Chat "1" *--> "*" Notification
 
-Mensaje --> MensajeId
-Mensaje --> ContenidoMensaje
-Mensaje --> UsuarioId
+Message --> MessageId
+Message --> MessageContent
+Message --> UserId
 
-Notificacion --> NotificacionId
+Notification --> NotificationId
 
 @enduml

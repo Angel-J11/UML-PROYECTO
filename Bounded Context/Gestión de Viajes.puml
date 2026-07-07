@@ -1,59 +1,59 @@
 @startuml ""
 
-package GestionViajes {
+package TripManagement {
 
-    package AgregadoViaje {
+    package TripAggregate {
 
-        class Viaje <<AggregateRoot>> {
-            - ViajeId: id
-            - ConductorId: conductorId
-            - Ruta: ruta
+        class Trip <<AggregateRoot>> {
+            - TripId: id
+            - DriverId: driverId
+            - Route: route
         }
 
-        class ViajeId <<ValueObject>> {
-            - Long: valor
+        class TripId <<ValueObject>> {
+            - Long: value
         }
 
-        class ConductorId <<ValueObject>> {
-            - Long: valor
+        class DriverId <<ValueObject>> {
+            - Long: value
         }
 
-        class Ruta <<Entity>> {
-            - RutaId: id
-            - Ubicacion: origen
-            - Ubicacion: destino
-            - DateTime: horaSalida
+        class Route <<Entity>> {
+            - RouteId: id
+            - Location: origin
+            - Location: destination
+            - DateTime: departureTime
         }
 
-        class RutaId <<ValueObject>> {
-            - Long: valor
+        class RouteId <<ValueObject>> {
+            - Long: value
         }
 
-        class Ubicacion <<ValueObject>> {
-            - String: direccion
+        class Location <<ValueObject>> {
+            - String: address
         }
 
-        class DisponibilidadAsientos <<Entity>> {
-            - Integer: asientosDisponibles
+        class SeatAvailability <<Entity>> {
+            - Integer: availableSeats
         }
     }
 }
 
-package Compartido {
+package Shared {
 
-    class UsuarioId <<ValueObject>> {
-        - Long: valor
+    class UserId <<ValueObject>> {
+        - Long: value
     }
 
 }
 
-Viaje --> ViajeId
-Viaje --> ConductorId
+Trip --> TripId
+Trip --> DriverId
 
-Viaje "1" *--> "1" Ruta
-Viaje "1" *--> "1" DisponibilidadAsientos
+Trip "1" *--> "1" Route
+Trip "1" *--> "1" SeatAvailability
 
-Ruta --> RutaId
-Ruta --> Ubicacion
+Route --> RouteId
+Route --> Location
 
 @enduml
