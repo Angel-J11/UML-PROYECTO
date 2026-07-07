@@ -1,0 +1,22 @@
+@startuml
+actor "Estudiante Pasajero" as Passenger
+boundary "App RutaFlex" as App
+control "TripController" as TripC
+entity "TripService" as TripS
+database "RutaFlex DB" as DB
+
+Passenger -> App : Iniciar sesión
+App -> TripC : login(correo, contraseña)
+TripC -> DB : validarUsuario()
+DB --> TripC : usuario válido
+TripC --> App : acceso concedido
+
+Passenger -> App : Buscar viaje
+App -> TripC : searchTrips(destino, fecha)
+TripC -> TripS : findTrips()
+TripS -> DB : obtenerViajes()
+DB --> TripS : lista de viajes
+TripS --> TripC : resultados
+TripC --> App : mostrar viajes
+
+@enduml

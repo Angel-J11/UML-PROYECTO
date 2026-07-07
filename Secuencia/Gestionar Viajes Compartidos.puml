@@ -1,0 +1,22 @@
+@startuml
+actor "Estudiante Conductor" as Driver
+boundary "App RutaFlex" as App
+control "TripController" as TripC
+entity "TripService" as TripS
+database "RutaFlex DB" as DB
+
+Driver -> App : Iniciar sesión
+App -> TripC : login(correo, contraseña)
+TripC -> DB : validarUsuario()
+DB --> TripC : usuario válido
+TripC --> App : acceso concedido
+
+Driver -> App : Gestionar viaje
+App -> TripC : updateTrip(tripId,cambios)
+TripC -> TripS : modifyTrip()
+TripS -> DB : updateTrip()
+DB --> TripS : viaje actualizado
+TripS --> TripC : confirmación
+TripC --> App : mostrar cambios
+
+@enduml

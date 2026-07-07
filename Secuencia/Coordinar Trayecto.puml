@@ -1,0 +1,16 @@
+@startuml
+actor "Estudiante" as Student
+boundary "App RutaFlex" as App
+control "CommunicationController" as CommC
+entity "ChatService" as ChatS
+database "RutaFlex DB" as DB
+
+Student -> App : Abrir chat
+App -> CommC : sendMessage(mensaje)
+CommC -> ChatS : createMessage()
+ChatS -> DB : saveMessage()
+DB --> ChatS : mensaje registrado
+ChatS --> CommC : confirmación
+CommC --> App : mostrar mensaje enviado
+
+@enduml

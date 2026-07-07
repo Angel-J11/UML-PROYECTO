@@ -1,0 +1,20 @@
+@startuml
+actor "Estudiante" as Student
+boundary "App RutaFlex" as App
+control "HistoryController" as HistoryC
+entity "HistoryService" as HistoryS
+database "RutaFlex DB" as DB
+
+Student -> App : Consultar historial
+App -> HistoryC : getHistory()
+HistoryC -> HistoryS : retrieveHistory()
+HistoryS -> DB : obtenerHistorial()
+DB --> HistoryS : historial
+
+HistoryS -> DB : calcularAhorro()
+DB --> HistoryS : ahorro
+
+HistoryS --> HistoryC : historial y ahorro
+HistoryC --> App : mostrar información
+
+@enduml

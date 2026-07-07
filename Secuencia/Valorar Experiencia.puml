@@ -1,0 +1,16 @@
+@startuml
+actor "Estudiante" as Student
+boundary "App RutaFlex" as App
+control "RatingController" as RatingC
+entity "RatingService" as RatingS
+database "RutaFlex DB" as DB
+
+Student -> App : Seleccionar viaje
+App -> RatingC : rateUser(score,comment)
+RatingC -> RatingS : createRating()
+RatingS -> DB : saveRating()
+DB --> RatingS : calificación registrada
+RatingS --> RatingC : confirmación
+RatingC --> App : mostrar éxito
+
+@enduml
