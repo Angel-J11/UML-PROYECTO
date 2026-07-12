@@ -3,29 +3,35 @@
 
 title Gestión de Viajes - Component Diagram
 
-Container(spa, "Single Page Application", "Angular", "Permite buscar, publicar y gestionar viajes.")
-ContainerDb(db, "Database", "MySQL", "Almacena información de viajes y rutas.")
+Container(spa, "Single Page Application", "Angular")
+ContainerDb(db, "Database", "MySQL")
 
 Container_Boundary(api, "Gestión de Viajes API") {
 
-    Component(searchTrips, "Buscar Viajes", "Application")
-    Component(publishRoute, "Publicar Ruta", "Application")
-    Component(manageTrips, "Gestionar Viajes", "Application")
-    Component(shared, "Shared", "Shared Kernel")
+    Component(tripController, "TripController", "Interface Layer")
+    Component(tripApplicationService, "TripApplicationService", "Application Layer")
+    Component(tripAggregate, "TripAggregate", "Domain Layer")
+    Component(routeDomainService, "RouteDomainService", "Domain Layer")
+    Component(tripRepository, "TripRepository", "Infrastructure Layer")
+    Component(sharedKernel, "Shared Kernel", "Shared")
 
 }
 
-Rel(spa, searchTrips, "")
-Rel(spa, publishRoute, "")
-Rel(spa, manageTrips, "")
+Rel(spa, tripController, "HTTP")
 
-Rel(searchTrips, publishRoute, "")
-Rel(searchTrips, shared, "")
-Rel(publishRoute, shared, "")
-Rel(manageTrips, shared, "")
+Rel(tripController, tripApplicationService, "")
 
-Rel(searchTrips, db, "")
-Rel(publishRoute, db, "")
-Rel(manageTrips, db, "")
+Rel(tripApplicationService, tripAggregate, "")
+Rel(tripApplicationService, routeDomainService, "")
+
+Rel(tripAggregate, tripRepository, "")
+Rel(routeDomainService, tripRepository, "")
+
+Rel(tripRepository, db, "CRUD")
+
+Rel(tripApplicationService, sharedKernel, "")
+Rel(tripAggregate, sharedKernel, "")
+Rel(routeDomainService, sharedKernel, "")
+Rel(tripRepository, sharedKernel, "")
 
 @enduml

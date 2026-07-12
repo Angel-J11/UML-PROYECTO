@@ -3,31 +3,40 @@
 
 title Gestión de Usuarios - Component Diagram
 
-Container(spa, "Single Page Application", "Angular", "Permite administrar la información de los usuarios.")
-ContainerDb(db, "Database", "MySQL", "Almacena datos de usuarios.")
+Container(spa, "Single Page Application", "Angular")
+ContainerDb(db, "Database", "MySQL")
 
 Container_Boundary(api, "Gestión de Usuarios API") {
 
-    Component(authentication, "Autenticación", "Application")
-    Component(profile, "Gestión de Perfil", "Application")
-    Component(users, "Gestión de Usuarios", "Application")
-    Component(shared, "Shared", "Shared Kernel")
+    Component(userController, "UserController", "Interface Layer")
+    Component(userApplicationService, "UserApplicationService", "Application Layer")
+    Component(authenticationService, "AuthenticationService", "Application Layer")
+    Component(userAggregate, "UserAggregate", "Domain Layer")
+    Component(profileDomainService, "ProfileDomainService", "Domain Layer")
+    Component(userRepository, "UserRepository", "Infrastructure Layer")
+    Component(sharedKernel, "Shared Kernel", "Shared")
 
 }
 
-Rel(spa, authentication, "")
-Rel(spa, profile, "")
-Rel(spa, users, "")
+Rel(spa, userController, "HTTP")
 
-Rel(authentication, profile, "")
-Rel(profile, users, "")
+Rel(userController, userApplicationService, "")
+Rel(userController, authenticationService, "")
 
-Rel(authentication, shared, "")
-Rel(profile, shared, "")
-Rel(users, shared, "")
+Rel(userApplicationService, userAggregate, "")
+Rel(authenticationService, userAggregate, "")
 
-Rel(authentication, db, "")
-Rel(profile, db, "")
-Rel(users, db, "")
+Rel(userAggregate, profileDomainService, "")
+
+Rel(profileDomainService, userRepository, "")
+Rel(authenticationService, userRepository, "")
+
+Rel(userRepository, db, "CRUD")
+
+Rel(userApplicationService, sharedKernel, "")
+Rel(authenticationService, sharedKernel, "")
+Rel(userAggregate, sharedKernel, "")
+Rel(profileDomainService, sharedKernel, "")
+Rel(userRepository, sharedKernel, "")
 
 @enduml

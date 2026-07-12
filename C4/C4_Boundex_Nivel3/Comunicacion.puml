@@ -3,27 +3,38 @@
 
 title Comunicación - Component Diagram
 
-Container(spa, "Single Page Application", "Angular", "Permite la comunicación entre conductor y pasajero.")
-ContainerDb(db, "Database", "MySQL", "Almacena mensajes del chat.")
+Container(spa, "Single Page Application", "Angular")
+ContainerDb(db, "Database", "MySQL")
 
 Container_Boundary(api, "Comunicación API") {
 
-    Component(chat, "Chat", "Application")
-    Component(messages, "Gestión de Mensajes", "Application")
-    Component(notifications, "Notificaciones", "Application")
-    Component(shared, "Shared", "Shared Kernel")
+    Component(chatController, "ChatController", "Interface Layer")
+    Component(chatApplicationService, "ChatApplicationService", "Application Layer")
+    Component(chatAggregate, "ChatAggregate", "Domain Layer")
+    Component(messageDomainService, "MessageDomainService", "Domain Layer")
+    Component(chatRepository, "ChatRepository", "Infrastructure Layer")
+    Component(notificationService, "NotificationService", "Infrastructure Layer")
+    Component(sharedKernel, "Shared Kernel", "Shared")
 
 }
 
-Rel(spa, chat, "")
-Rel(chat, messages, "")
-Rel(messages, notifications, "")
+Rel(spa, chatController, "HTTP / WebSocket")
 
-Rel(chat, shared, "")
-Rel(messages, shared, "")
-Rel(notifications, shared, "")
+Rel(chatController, chatApplicationService, "")
 
-Rel(messages, db, "")
-Rel(notifications, db, "")
+Rel(chatApplicationService, chatAggregate, "")
+Rel(chatApplicationService, messageDomainService, "")
+
+Rel(chatAggregate, chatRepository, "")
+Rel(messageDomainService, chatRepository, "")
+
+Rel(messageDomainService, notificationService, "")
+
+Rel(chatRepository, db, "CRUD")
+
+Rel(chatApplicationService, sharedKernel, "")
+Rel(chatAggregate, sharedKernel, "")
+Rel(messageDomainService, sharedKernel, "")
+Rel(chatRepository, sharedKernel, "")
 
 @enduml

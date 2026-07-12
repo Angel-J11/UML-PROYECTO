@@ -1,37 +1,44 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
-title RutaFlex - Container Diagram
+title RutaFlex - C4 Model - Container Diagram
 
-Person(usuario, "Usuario", "Pasajero o Conductor")
+Person(usuario, "Usuario", "Estudiante pasajero o conductor")
 
-System_Boundary(system, "RutaFlex") {
+System_Boundary(rutaflex, "RutaFlex") {
 
-    Container(web, "Landing Page", "React", "Información del servicio")
-    Container(app, "Aplicacion Web", "Flutter", "Gestión de viajes compartidos")
-    Container(api, "Backend API", "Node.js", "Lógica de negocio")
-    Container(chat, "Servicio de Chat", "WebSocket", "Mensajería entre usuarios")
-    ContainerDb(db, "Base de Datos", "MySQL", "Persistencia de información")
-    Container(notification, "Servicio de Notificaciones", "Firebase", "Notificaciones push")
+    Container(landing, "Landing Page", "React", "Sitio web público con información del servicio y acceso a la aplicación.")
+
+    Container(spa, "Single Page Application (SPA)", "React", "Aplicación web donde los usuarios gestionan viajes, rutas, chat, historial y perfil.")
+
+    Container(api, "Backend API", "Node.js + Express", "Expone servicios REST y contiene la lógica de negocio de RutaFlex.")
+
+    Container(chat, "Servicio de Chat", "WebSocket", "Permite la comunicación en tiempo real entre conductores y pasajeros.")
+
+    ContainerDb(db, "Base de Datos", "MySQL", "Almacena usuarios, viajes, rutas, mensajes, calificaciones e historial.")
+
+    Container(notification, "Servicio de Notificaciones", "Firebase Cloud Messaging", "Envía notificaciones de mensajes, cambios de viaje y eventos importantes.")
 }
 
-System_Ext(googlemaps, "Google Maps API", "Geolocalización")
-System_Ext(emailservice, "Servicio de Correos", "Validación institucional")
+System_Ext(googlemaps, "Google Maps API", "Servicios de mapas y geolocalización")
+System_Ext(emailservice, "Servicio de Correos", "Validación de correos institucionales")
 
-Rel(usuario, web, "Consulta información")
-Rel(usuario, app, "Usa")
+Rel(usuario, landing, "Consulta información del servicio")
+Rel(usuario, spa, "Utiliza la aplicación web")
 
-Rel(web, app, "Redirecciona descarga")
-Rel(app, api, "HTTPS / JSON")
+Rel(landing, spa, "Accede a la aplicación")
+
+Rel(spa, api, "HTTPS / JSON")
+
 Rel(api, db, "CRUD SQL")
 
 Rel(api, chat, "Gestiona mensajes")
-Rel(chat, app, "Mensajes en tiempo real")
+Rel(chat, spa, "WebSocket")
 
-Rel(api, notification, "Envía eventos")
-Rel(notification, app, "Push notifications")
+Rel(api, notification, "Genera eventos")
+Rel(notification, spa, "Notificaciones")
 
-Rel(api, googlemaps, "Solicita rutas y geolocalización")
+Rel(api, googlemaps, "Consulta rutas y geolocalización")
 Rel(api, emailservice, "Verifica correos institucionales")
 
 @enduml
