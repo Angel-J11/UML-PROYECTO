@@ -2,7 +2,7 @@
 actor "Estudiante" as Student
 boundary "App RutaFlex" as App
 control "CommunicationController" as CommC
-entity "ChatService" as ChatS
+entity "Chat" as ChatS
 database "Repository" as DB
 
 Student -> App : Abrir chat

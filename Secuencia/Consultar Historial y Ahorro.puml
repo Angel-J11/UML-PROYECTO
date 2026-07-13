@@ -2,7 +2,7 @@
 actor "Estudiante" as Student
 boundary "App RutaFlex" as App
 control "HistoryController" as HistoryC
-entity "HistoryService" as HistoryS
+entity "TripHistory" as HistoryS
 database "Repository" as DB
 
 Student -> App : Consultar historial
