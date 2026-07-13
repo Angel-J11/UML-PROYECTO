@@ -3,7 +3,7 @@ actor "Estudiante Conductor" as Driver
 boundary "App RutaFlex" as App
 control "TripController" as TripC
 entity "TripService" as TripS
-database "RutaFlex DB" as DB
+database "Repository" as DB
 
 Driver -> App : Iniciar sesión
 App -> TripC : login(correo, contraseña)

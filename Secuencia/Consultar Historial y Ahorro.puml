@@ -3,7 +3,7 @@ actor "Estudiante" as Student
 boundary "App RutaFlex" as App
 control "HistoryController" as HistoryC
 entity "HistoryService" as HistoryS
-database "RutaFlex DB" as DB
+database "Repository" as DB
 
 Student -> App : Consultar historial
 App -> HistoryC : getHistory()

@@ -3,7 +3,7 @@ actor "Estudiante" as Student
 boundary "App RutaFlex" as App
 control "RatingController" as RatingC
 entity "RatingService" as RatingS
-database "RutaFlex DB" as DB
+database "Repository" as DB
 
 Student -> App : Seleccionar viaje
 App -> RatingC : rateUser(score,comment)

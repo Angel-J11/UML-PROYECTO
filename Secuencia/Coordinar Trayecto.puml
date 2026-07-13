@@ -3,7 +3,7 @@ actor "Estudiante" as Student
 boundary "App RutaFlex" as App
 control "CommunicationController" as CommC
 entity "ChatService" as ChatS
-database "RutaFlex DB" as DB
+database "Repository" as DB
 
 Student -> App : Abrir chat
 App -> CommC : sendMessage(mensaje)
